@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import SocialLogin from './SocialLogin'
 
+
 export default function LoginForm() {
   const router=useRouter()
      const handleFormData=async(e)=>{
@@ -17,7 +18,7 @@ export default function LoginForm() {
        const res= await signIn("credentials",{email,password,redirect:false})
        if(res.ok)
        {   
-             router.push('/')
+             router.push('/dashboard')
              formData.reset()
              
        }else
