@@ -8,7 +8,7 @@ import { authOptions } from '@/lib/authOptions';
 
 export default async function CourseReview({ id }) {
   const session=await getServerSession(authOptions)
-  console.log(session)
+ // console.log(session)
   const user=session?.user
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/reviews/${id}`);
   const review = await res.json();

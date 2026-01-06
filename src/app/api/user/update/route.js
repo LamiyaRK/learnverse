@@ -3,27 +3,31 @@ import dbConnect from "@/lib/dbConnect";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 
-
 export async function PUT(req) {
   try {
-    // Get logged-in user session
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user?.email) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Parse request body
     const body = await req.json();
-    const { name, image, phone, bio } = body;
+    const { name, image, phone, bio, address } = body;
 
-    // Connect to user collection
     const userCol = await dbConnect("user");
 
-    // Update user document by email
     const updateResult = await userCol.updateOne(
       { email: session.user.email },
-      { $set: { name, image, phone, bio } }
+      {
+        $set: {
+          name,
+          image,
+          phone,
+          bio,
+          address,
+          role: "student", // default role
+        },
+      }
     );
 
     if (updateResult.matchedCount === 0) {
@@ -36,9 +40,6 @@ export async function PUT(req) {
     }, { status: 200 });
   } catch (error) {
     console.error("Error updating user profile:", error);
-    return NextResponse.json(
-      { error: "Failed to update profile" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to update profile" }, { status: 500 });
   }
 }

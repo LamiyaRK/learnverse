@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Bell } from "lucide-react";
 
 export default function DashNav({ user }) {
+  //console.log(user)
   return (
     <nav className="flex justify-end bg-primary text-white shadow px-6 py-2 w-full">
      

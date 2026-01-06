@@ -50,20 +50,44 @@ pages:{
     signIn:'/login'
 },
 callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-     
-      if(account){
-        const {providerAccountId,provider}=account
-        const {email:user_email,image,name}=user
-        const usercol= dbConnect("user")
-        const cuser=await usercol.findOne({providerAccountId})
-        if(!cuser)
-        {
-          const payload={providerAccountId,provider,email:user_email,image,name}
-          await usercol.insertOne(payload)
-        }
+  async signIn({ user, account }) {
+    if (account && account.provider !== "credentials") {
+      const userCol = await dbConnect("user");
+
+      const existingUser = await userCol.findOne({
+        email: user.email,
+      });
+
+      if (!existingUser) {
+        await userCol.insertOne({
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          provider: account.provider,
+          providerAccountId: account.providerAccountId,
+          role: "student", // 👈 default role
+          createdAt: new Date(),
+        });
       }
-      return true
     }
+    return true;
   },
+
+  // 🔐 store role in JWT
+  async jwt({ token, user }) {
+    if (user) {
+      token.role = user.role;
+      token.id = user._id;
+    }
+    return token;
+  },
+
+  // 📦 expose role to client
+  async session({ session, token }) {
+    session.user.role = token.role;
+    session.user.id = token.id;
+    return session;
+  },
+},
+
 }

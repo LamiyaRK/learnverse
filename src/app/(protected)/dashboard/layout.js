@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/authOptions";
 import "../../globals.css"; // if you want the same global styles
 import SidebarDrawer from "./components/SidebarDrawer";
 import DashNav from "./components/DashNav";
+import NextAuthProvider from "@/app/Providers/NextAuthProvider";
 
 export const metadata = {
   title: "Dashboard - LearnVerse",
@@ -22,6 +23,7 @@ export default async function DashboardLayout({ children }) {
   return (
     <html lang="en">
       <body className="antialiased min-h-screen bg-gray-50">
+      <NextAuthProvider>
         <div className="flex min-h-screen">
           <div className=" min-h-screen">{session && <SidebarDrawer />}</div>
           <div className="flex-1">
@@ -30,6 +32,7 @@ export default async function DashboardLayout({ children }) {
           {children}</main>
           </div>
         </div>
+        </NextAuthProvider>
       </body>
     </html>
   );

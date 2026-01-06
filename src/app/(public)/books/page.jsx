@@ -4,7 +4,7 @@ import BookCard from './components/BookCard';
 export default async function Books() {
      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/books`);
         const books = await res.json();
-        console.log(books)
+        //console.log(books)
   return (
     <div className='my-20'>
             <p className='text-xl text-primary font-bold text-center'>Empower Your Mind</p>

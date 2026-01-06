@@ -56,7 +56,7 @@ export default function ProfileClient({ user }) {
         <h2 className="text-2xl font-semibold mt-4">{formData.name}</h2>
         <p className="text-gray-500">{formData.email}</p>
         <p className="bg-gray-100 px-3 py-1 mt-2 rounded-full text-sm">
-          Role: {formData.role || "User"}
+          Role: {formData.role || "student"}
         </p>
       </div>
 
@@ -104,7 +104,7 @@ export default function ProfileClient({ user }) {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="px-4 py-2 bg-accent text-white rounded-lg"
+              className="px-4 py-2 bg-primary text-white rounded-lg"
             >
               {saving ? "Saving..." : "Save"}
             </button>
@@ -112,7 +112,7 @@ export default function ProfileClient({ user }) {
         ) : (
           <button
             onClick={() => setEditMode(true)}
-            className="px-4 py-2 bg-accent text-white rounded-lg"
+            className="px-4 py-2 bg-primary text-white rounded-lg"
           >
             Edit Profile
           </button>

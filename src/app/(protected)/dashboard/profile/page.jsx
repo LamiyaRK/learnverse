@@ -23,7 +23,7 @@ export default async function ProfilePage() {
   });
 
   const user = await res.json();
-  console.log(user)
+  //console.log(user)
 
   return (
     <div className=" py-20 w-full">

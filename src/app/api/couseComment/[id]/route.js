@@ -18,7 +18,7 @@ export const GET=async(req,{params})=>{
 export const PATCH = async (req, { params }) => {
   try {
     const { id } = params;
-    console.log(params)
+   // console.log(params)
     const updatedData = await req.json();
 
     const commentCol =dbConnect("comments");
@@ -28,7 +28,7 @@ export const PATCH = async (req, { params }) => {
       { _id: new ObjectId(id) },
       { $set: { ...updatedData, updatedAt: new Date() } }
     );
-       console.log(result)
+       //console.log(result)
     if (result.matchedCount === 0) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
     }
@@ -42,7 +42,7 @@ export const PATCH = async (req, { params }) => {
 
 export const DELETE = async (req, { params }) => {
   try {
-    console.log(params)
+   // console.log(params)
     const { id } = params;
     const commentCol = await dbConnect("comments");
     const result = await commentCol.deleteOne({ _id: new ObjectId(id) });

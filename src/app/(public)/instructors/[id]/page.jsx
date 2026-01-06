@@ -3,15 +3,17 @@ import Link from 'next/link';
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { HiMiniSquares2X2 } from "react-icons/hi2";
+import InstructorRating from '../components/InstructorRating';
 export default async function InstructorDetails({params}) {
     const {id}=params
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/instructors/${id}`);
     const instructor = await res.json();
         //console.log(instructor)
-    const {name,profileImage,designation,bio,email,phone,socials,specialization,experience}=instructor
+    const {name,profileImage,designation,bio,email,phone,socials,specialization,experience,courses}=instructor
         
 return (
-    <div className='w-11/12 max-w-7xl mx-auto flex justify-between items-center gap-5 my-40'>
+    <div className='w-11/12 max-w-7xl mx-auto'> 
+    <div className=' flex justify-between items-center gap-5 my-40'>
         <Image
                     src={profileImage}
                     alt={name}
@@ -63,6 +65,8 @@ return (
                 </div>
         </div>
                      
+    </div>
+    <InstructorRating instructor={name} courseId={courses[0]}/>
     </div>
   )
 }
