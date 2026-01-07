@@ -27,7 +27,7 @@ export const roleMenuItems = {
 
   instructor: [
     { name: "Dashboard", href: "/dashboard/instructor", icon: <LayoutDashboard size={18} /> },
-    { name: "My Courses", href: "/dashboard/my-courses", icon: <ClipboardCheck size={18} /> },
+    { name: "My Courses", href: "/dashboard/add-modules", icon: <ClipboardCheck size={18} /> },
     { name: "Discussion", href: "/dashboard/discussion", icon: <MessageSquare size={18} /> },
     { name: "Profile", href: "/dashboard/profile", icon: <User size={18} /> },
   ],

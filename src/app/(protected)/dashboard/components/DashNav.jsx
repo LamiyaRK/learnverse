@@ -22,7 +22,7 @@ export default function DashNav({ user }) {
             alt="User Avatar"
             width={40}
             height={40}
-            className="rounded-full w-13 h-13"
+            className="rounded-full w-10 h-11 object-center object-cover"
           />
         </div>
       </div>
